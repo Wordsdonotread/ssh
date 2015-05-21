@@ -25,11 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   
-<<<<<<< HEAD
-	<h1>封装爬虫2</h1>
-=======
-	<h1>封装爬虫</h1>
->>>>>>> branch 'master' of https://github.com/Wordsdonotread/ssh
+	<h1>封装爬虫3</h1>
   	 <form action="parse/lianjie" method="post">
   	 	<table>
   	 		<thead><tr><td>无分页获取所有链接</td></tr></thead>
