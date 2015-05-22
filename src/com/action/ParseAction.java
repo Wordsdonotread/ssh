@@ -35,6 +35,9 @@ public class ParseAction {
 		this.beforurl = beforurl;
 	}
 
+
+
+
 	public String getAfterurl() {
 		return afterurl;
 	}
