@@ -35,13 +35,12 @@ public class ParseAction {
 		this.beforurl = beforurl;
 	}
 
-
-	public String getAfterul() {
+	public String getAfterurl() {
 		return afterurl;
 	}
 
 
-	public void setAfterul(String afterurl) {
+	public void setAfterurl(String afterurl) {
 		this.afterurl = afterurl;
 	}
 
@@ -159,7 +158,7 @@ public class ParseAction {
 		return "zhuaqu";
 	}
 	@RequestMapping("/parse/fenyelianjie")
-	public String fenyelianjie(){
+	public String fenyelianjie()throws org.htmlparser.util.ParserException{
 		href=fz.listAllHref(beforurl,afterurl, regex[0], size, tag, attrkey, attrvalue);
 		List<String> arr=new ArrayList<String>();
 		if(qianzhui!=""&&qianzhui!=null){
