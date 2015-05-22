@@ -422,7 +422,7 @@ public class FZParse extends Thread{
     }
     
     
-    public static void chuangyerongzi(){
+    public static void chuangyerongzi()throws org.htmlparser.util.ParserException{
     	List<String> all=listAllHref("http://itjuzi.com/investevents?page=","", "(http://itjuzi.com/investevents/[\\s\\S]{1,60}?)<", 753,"table", "id", "company-member-list");
     	System.out.println(all.size());
     	try {
@@ -844,7 +844,7 @@ public class FZParse extends Thread{
     	//test58();
     	
     }
-    public static List<String> listAllHref(String beforurl,String afterurl,String rule,int size,String tag,String attrkey,String attrvalue){
+    public static List<String> listAllHref(String beforurl,String afterurl,String rule,int size,String tag,String attrkey,String attrvalue)throws org.htmlparser.util.ParserException{
     	List<String> all=new ArrayList<String>();
     	try {
 			for (int i = 1; i <= size; i++) {
