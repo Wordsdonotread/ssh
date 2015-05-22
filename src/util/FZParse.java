@@ -418,7 +418,7 @@ public class FZParse extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
+    	System.out.println("dev upd");
     }
     
     
