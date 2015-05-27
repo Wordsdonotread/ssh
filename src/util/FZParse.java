@@ -138,10 +138,14 @@ public class FZParse extends Thread{
 		}//end wile
 	}
 	
-	public static String getContent(String url, String tag, String attrkey, String attrvalue) throws IOException, ParserException 
+	public static String getContent(String url, String tag, String attrkey, String attrvalue) throws IOException, org.htmlparser.util.ParserException 
 	{
 		Parser parser=new Parser();
-		parser.setURL(url);
+		try {
+			parser.setURL(url);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		//设置目标网页的编码方式
 		parser.setEncoding(CharsetAutoSwitch.dectedEncode(url)); 
 		//创建正文节点的过滤器
@@ -406,19 +410,39 @@ public class FZParse extends Thread{
 //			e.printStackTrace();
 //		}
     	//List<String> all=listAllHref("http://itjuzi.com/investevents?page=","", "(http://itjuzi.com/investevents/[\\s\\S]{1,60}?)<", 2,"table", "id", "company-member-list");
+//    	try {
+//			String con =getContent("http://itjuzi.com/company/20782", "div", "class", "page-wrapper");
+//			//(http://itjuzi.com/investfirm/(?![^<>]*?\\?[^<>]*?>).*?)\")
+//		
+//			System.out.println(regexStrList(con, "<li>行业:([\\s\\S]{0,600}?)</li>").get(0).trim());
+//		
+//    	} catch (ParserException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+			
     	try {
-			String con =getContent("http://itjuzi.com/company/20782", "div", "class", "page-wrapper");
-			System.out.println(con);
-			//(http://itjuzi.com/investfirm/(?![^<>]*?\\?[^<>]*?>).*?)\")
-			System.out.println(regexStrList(con, "<li>行业:([\\s\\S]{0,600}?)</li>"));
-		} catch (ParserException e) {
+			String con =getContent("http://bjmjzz.bjmzj.gov.cn/wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000008960&websitId=100&netTypeId=2", "table", "width", "92%");
+			System.out.println(regexStr(con,"bgcolor=\"#f8e2cf\">([\\s\\S]{1,60}?)</td>"));
+			System.out.println(regexStr(con, "<td width=\"33%\">([\\s\\S]{1,60}?)</td>"));
+			System.out.println(regexStr(con, "<td colspan=\"3\">([\\s\\S]{1,60}?)</td>"));
+			List<String> list =regexStrList(con, "<td>([\\s\\S]{0,600}?)</td>");
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(list.get(i).replaceAll("&nbsp;","").trim());
+			}
+    	} catch (ParserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	System.out.println("master and dev upd");
+//    	String str="[http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000008950, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000008951, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009028, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010980, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000008350, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010292, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010475, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009606, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009708, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009746, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009607, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009602, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010582, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010287, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010265, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010414, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010589, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010578, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010483, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000008453, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000008950, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000008951, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009028, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010980, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000008350, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010292, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010475, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009606, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009708, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009746, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009607, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000009602, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010582, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010287, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010265, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010414, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010589, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010578, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000010483, http://bjmjzz.bjmzj.gov.cn//wssb/wssb/dc/orgInfo.do?action=seeParticular&orgId=000010000008453]";
+//    	String []all=str.replaceAll("[", "").replaceAll("]", "").split(",");
+//    	System.out.println(all[0]);
     }
     
     
@@ -1033,9 +1057,9 @@ public class FZParse extends Thread{
 		fileOut.close();
     }
     
-    public static void wancheng(List<String> hrefAll,String tag,String attrkey,String attrvalue,String[] regex) throws ParserException, IOException{
+    public static void wancheng(List<String> hrefAll,String tag,String attrkey,String attrvalue,String[] regex,String []type,String ename) throws ParserException, IOException{
     	HSSFWorkbook wb = new HSSFWorkbook();// 建立新HSSFWorkbook对象
-		FileOutputStream fileOut = new FileOutputStream("d:/测试/test1.xls");
+		FileOutputStream fileOut = new FileOutputStream("d:/测试/"+ename+".xls");
 		HSSFSheet sheet = wb.createSheet("new sheet");
 		System.out.println(hrefAll.size());
     	for (int i = 0; i < hrefAll.size(); i++) {
@@ -1044,13 +1068,18 @@ public class FZParse extends Thread{
 			System.out.println("getContent");
     		List<String> content = new ArrayList<String>();
 			for (int j = 0; j < regex.length; j++) {
-				List<String> arr=regexStrList(con, regex[j]);
+				List<String> arr= new ArrayList<String>();
+				if(type[j].equals("2")){
+					arr=regexStrList(con, regex[j]);
+				}else{
+					arr.add(regexStr(con, regex[j]));
+				}
 				if(arr.size()==0){
 					content.add("");
 				}else{
 					for (int k = 0; k < arr.size(); k++) {
 						try {
-							content.add(arr.get(k).replaceAll("(<[\\s\\S]{1,1000}?>)", ""));
+							content.add(arr.get(k).replaceAll("(<[\\s\\S]{1,1000}?>)", "").replaceAll("&nbsp;","").trim());
 						} catch (Exception e) {
 							content.add("");
 						}
