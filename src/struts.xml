@@ -5,7 +5,7 @@
 <struts>
 	<package name="dept" extends="struts-default">
 		<action name="*" class="ParseAction" method="{1}">
-			<result name="zhuaqu">../index.jsp</result>
+			<result name="zhuaqu">index.jsp</result>
 		</action>
 	</package> 
 </struts>

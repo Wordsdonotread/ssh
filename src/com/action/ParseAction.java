@@ -26,6 +26,31 @@ public class ParseAction {
 	private String beforurl;
 	private String afterurl;
 	private int size;
+	private String[] regex;
+	private String[] type;
+	private String ename;
+	
+	
+	public String getEname() {
+		return ename;
+	}
+
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+
+
+	public String[] getType() {
+		return type;
+	}
+
+
+	public void setType(String[] type) {
+		this.type = type;
+	}
+
+
 	public String getBeforurl() {
 		return beforurl;
 	}
@@ -86,7 +111,7 @@ public class ParseAction {
 	public void setHref(List<String> href) {
 		this.href = href;
 	}
-	private String[] regex;
+	
 	public String[] getRegex() {
 		return regex;
 	}
@@ -160,7 +185,7 @@ public class ParseAction {
 		href=arr;
 		return "zhuaqu";
 	}
-	@RequestMapping("/parse/fenyelianjie")
+	
 	public String fenyelianjie()throws org.htmlparser.util.ParserException{
 		href=fz.listAllHref(beforurl,afterurl, regex[0], size, tag, attrkey, attrvalue);
 		List<String> arr=new ArrayList<String>();
@@ -181,10 +206,16 @@ public class ParseAction {
 		
 		return "zhuaqu";
 	}
-	@RequestMapping("/parse/wancheng")
 	public String wancheng(){
+		String hrefAll=href.get(0).replace("]","").replace("[","");
+		System.out.println(hrefAll);
+		String all[]=hrefAll.split(", ");
+		List<String> list=new ArrayList<String>();
+		for (int i = 0; i < all.length; i++) {
+			list.add(all[i]);
+		}
 		try {
-			fz.wancheng(href, tag, attrkey, attrvalue, regex);
+			fz.wancheng(list, tag, attrkey, attrvalue, regex,type,ename);
 		} catch (ParserException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

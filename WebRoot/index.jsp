@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	 		<tr><td><input type="submit"></td></tr>
   	 	</table>
   	 </form>
-  	 <form action="parse/fenyelianjie" method="post">
+  	 <form action="fenyelianjie" method="post">
   	 	<table>
   	 		<thead><tr><td>分页获取所有链接</td></tr></thead>
   	 		<tr><td>地址前缀:</td><td><input name="beforurl"></td><td>地址后缀:</td><td><input name="afterurl"></td><td>长度：</td><td><input name="size"></td></tr>
@@ -73,12 +73,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	 </form>
   	 <textarea name="tiqu" rows="10" cols="50">${tiqu }</textarea>
   	 <br><br>
-  	 <form action="parse/wancheng" method="post">
+  	 <form action="wancheng" method="post">
   	 	<table id="tiqu">
+  	 	<span>下拉框的值表示：1.获取第一个符合正则表达式的内容 2.表示获取所有符合正则表达式的内容</span>
+  	 	<tr><td></td><td><input name="href" value="${href }"></td></tr>
+  	 	<tr><td>Excel:</td><td><input name="ename"></td></tr>
   	 	<tr><td>标签名:</td><td><input name="tag"></td><td>样式:</td><td><input name="attrkey"></td><td>值:</td><td><input name="attrvalue"></td></tr>
   	 	<tr><td valign="top">提取内容正则：</td><td><div class="form_listrl" id="sel1" >
              <div class="sel1">
-	             <input name="regex">
+	             <input name="regex"><select name="type"><option selected="selected">1</option><option>2</option></select>
 	             <span class="del1">X</span>
                  </div>
         </div>
@@ -113,5 +116,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        				$(this).closest(".sel1").remove();
        				srot();
        			});
+       	
  	</script>
 </html>
